@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sinh viên</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="./js/script.js"></script>
+    </link>
+</head>
+
+<body>
+    <div id="header">
+        <div class="logo">
+            <img src="image/logo.PNG" alt="logo USTH" style="width: 355px; height: 100px;">
+            <a href="#"><img src="image/h-email.png" alt="email to usth" style="width: 70px; height: 70px;"></a>
+            <div class="contact-text">
+                <p>Email: </p>
+                <p style="margin-bottom: 0;">Usth@gmail.com</p>
+            </div>
+            <a href="#"><img src="image/h-phone.png" alt="phone to usth" style="width: 70px; height: 70px;"></a>
+            <div class="contact-text">
+                <p>Số điện thoại: </p>
+                <p style="margin-bottom: 0;">0123456789 </p>
+            </div>
+        </div>
+        <div id="account">
+            <span>Lê Hoàng Long</span> |
+            <a href="#">Đăng xuất</a> |
+            <a href="#">Báo Cáo Lỗi</a> |
+        </div>
+        <div id="nav-bar">
+            <ul id="nav-item">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Giới thiệu chung</a></li>
+                <li><a href="#">Tuyển sinh</a></li>
+                <li><a href="#">Thời khoá biểu</a></li>
+                <li><a href="#">Tin tức</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="side-bar">
+            <a href="#">Cái gì đó</a>
+            <a href="#">Cái gì đấy</a>
+            <a href="#">Cái gì vậy</a>
+            <a href="#">Cái gì nữa</a>
+            <a href="#">Cái gì thế</a>
+        </div>
+
+        <div class="main">
+            <h1> Quản lý thông tin sinh viên </h1>
+            <button id="add-modal">Add person</button>
+		    <button id="delete-batch">Delete selected</button>
+			<input type="search" placeholder="search by name" id="search"/>
+            <table class="table" id="list">
+
+            </table>
+            <div class="pagination">
+                <a href="#" class="page">previous page</a>
+                <a href="#" class="page">1</a>
+                <a href="#" class="page">2</a>
+                <a href="#" class="page">3</a>
+                <a href="#" class="page">next page</a>
+                
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal-container" id="modal-container">
+        <div id="modal-content" class="modal-content">
+
+            <span id="close-btn">X</span>
+            <h2>Thông tin sinh viên</h2>
+            <form class="modal-form" id="modal-form" name="modal-form">
+
+                <div class="addStudentID">
+                    <label for="studentId">Mã sinh viên<span class="required">*</span>: </label>
+
+                    <input class="form-control" type="text" id="studentId" name="studentId" required>
+
+                </div>
+
+                <div class="addStudentName">
+                    <label for="name">Họ và tên<span class="required">*</span>:</label>
+
+                    <input class="form-control" type="text" id="name" name="name" required><br>
+
+                </div>
+
+
+
+                <div class="addStudentDoB">
+                    <label  for="dob">Ngày sinh<span class="required">*</span>:</label>
+
+                    <input class="form-control" type="date" id="dob" name="dob" required><br>
+
+                </div>
+
+                <div class="addStudentcourse">
+                    <label for="courses">Khoa<span class="required">*</span>:</label>
+
+                    <select class="form-control" id="courses" name="courses" required>
+                        <option value="" selected>-- Tất cả khoa --</option>
+                        <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+                        <option value="Xây dựng">Kỹ thuật xây dựng</option>
+                        <option value="Kinh tế">Kinh tế</option>
+                    </select><br>
+
+                </div>
+
+
+
+                <div class="addStudentCC">
+                    <label for="cmcd">CMCD<span class="required">*</span>:</label>
+
+                    <input class="form-control" type="number" id="cmnd" name="cmnd" required>
+
+                </div>
+                <div class="addStudentPhone">
+                    <label for="phone">Số điện thoại<span class="required">*</span>:</label>
+
+                    <input class="form-control" type="number" id="phone" name="phone" required><br>
+
+                </div>
+
+
+
+                <div class="addStudentEmail">
+                    <label for="email">Email<span class="required">*</span>:</label>
+
+                    <input class="form-control" type="text" id="email" name="email" required>
+
+                </div>
+                <div class="addStudentconsultant">
+                    <label for="consultant">Cố vấn học tập:</label>
+
+                    <input class="form-control" type="text" id="consultant" name="consultant" ><br>
+
+                </div>
+
+
+
+                <div class="addStudenthighschool">
+                    <label for="highschool">Trường cấp 3<span class="required">*</span>:</label>
+
+                    <input class="form-control" type="text" id="highschool" name="highschool" required>
+
+                </div>
+                <div class="addStudentgender" style="margin-bottom: 0;">
+                    <label for="gender">Giới tính<span class="required">*</span>:</label>
+                    <input type="radio" id="male" name="gender" value="Nam">
+                    <label for="male">Nam</label>
+                    <input type="radio" id="female" name="gender" value="Nữ">
+                    <label for="female">Nữ</label><br>
+                    <div id="gender"></div>
+                </div>
+
+
+                <div class="addStudentaddress">
+                    <label for="address">Địa chỉ:</label>
+                    <textarea class="form-control" id="address" name="address"></textarea><br>
+                </div>
+                <div class="submit">
+                    <label for="submit" id="submit">
+					</label>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    </div>
+    </div>
+
+
+
+</body>
+
+</html>
