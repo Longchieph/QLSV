@@ -214,9 +214,12 @@ function edit(id){
 	
 }
 //confirm function
-function confirm(){
-	//enable input fields
+function confirmModal(){
+	//disable fields
 	let inputs = document.getElementsByTagName('input');
+	document.getElementsByTagName('select')[0].disabled = false;
+	document.getElementsByTagName('input')[0].disabled = false;
+	document.getElementsByTagName('textarea')[0].disabled = false;
 	for(let i = 0; i < inputs.length; ++i){
 		inputs[i].disabled = false;;
 	}
@@ -226,49 +229,56 @@ function confirm(){
 
 //delete batch function
 function deleteSelected(){
-	//get all ids of person to be deleted
-	let to_delete = document.querySelectorAll('input[type=checkbox]:checked');
-	for(let i = 0; i < data.length; ++i){
-		for(let j = 0; j < to_delete.length; ++j){
-			if(data[i].studentId === parseInt(to_delete[j].value) ){
-				data.splice(i, 1)
+	if(confirm("Chắc chưa?") ){
+		//get all ids of person to be deleted
+		let to_delete = document.querySelectorAll('input[type=checkbox]:checked');
+		for(let i = 0; i < data.length; ++i){
+			for(let j = 0; j < to_delete.length; ++j){
+				if(data[i].studentId === parseInt(to_delete[j].value) ){
+					data.splice(i, 1)
+				}
 			}
 		}
+		//refresh table
+		renderTable();
+		//cleanUp
+		cleanUp();
 	}
-	//refresh table
-	renderTable();
-	//cleanUp
-	cleanUp();
 
 }
 
 //delete single
 function deleteSingle(id){
-	for(let i = 0; i < data.length; ++i){
-		if(data[i].studentId.toString() === id.toString() ){
-			data.splice(i, 1)
+	if(confirm("Chắc chưa?")){
+		for(let i = 0; i < data.length; ++i){
+			if(data[i].studentId.toString() === id.toString() ){
+				data.splice(i, 1)
+			}
 		}
+		//refresh table
+		renderTable();
+		//cleanUp
+		cleanUp();
 	}
-	//refresh table
-	renderTable();
-	//cleanUp
-	cleanUp();
 }
 
 //modal setting
 function openEditModal(id){
 	//show the modal and set corresponding submit button
-	console.log(id);
 	document.getElementsByClassName("modal-container")[0].style.display = 'block';
 	document.getElementById('submit').innerHTML = `<button type="button" onclick="edit(${id})">Update</button>`;
 	
 	//find and get corresponding person by id
 	for(let i = 0; i < data.length; ++i){
-		if(data[i].id === parseInt(id)){
+		if(data[i].studentId === parseInt(id)){
 			document.getElementById('studentId').value = data[i].studentId;
 			document.getElementById('name').value = data[i].name;
 			document.getElementById('email').value = data[i].email;
-            document.querySelector('input[name="gender"]:checked').value = data[i].gender;
+			if(data[i].gender.toLowerCase() === 'male'){
+				document.getElementById('male').checked = true;
+			}else{
+				document.getElementById('female').checked = true;
+			}
 			document.getElementById('courses').value = data[i].courses;
 			document.getElementById('address').value = data[i].address;
             document.getElementById('phone').value = data[i].phone;
@@ -285,21 +295,28 @@ function openEditModal(id){
 function openDetailModal(id){
 	//show the modal and set corresponding submit button
 	document.getElementsByClassName("modal-container")[0].style.display = 'block';
-	document.getElementById('submit').innerHTML = '<button type="button" onclick="confirm()">Confirm</button>';
+	document.getElementById('submit').innerHTML = '<button type="button" onclick="confirmModal()">Confirm</button>';
 	
-	//disable input fields
+	//disable  fields
 	let inputs = document.getElementsByTagName('input');
+	document.getElementsByTagName('select')[0].disabled = true;
+	document.getElementsByTagName('input')[0].disabled = true;
+	document.getElementsByTagName('textarea')[0].disabled = true;
 	for(let i = 0; i < inputs.length; ++i){
 		inputs[i].disabled = true;
 	}
 	
 	//find and get corresponding person by id
 	for(let i = 0; i < data.length; ++i){
-		if(data[i].studentId === parseInt(studentId)){
+		if(data[i].studentId === parseInt(id)){
 			document.getElementById('studentId').value = data[i].studentId;
 			document.getElementById('name').value = data[i].name;
 			document.getElementById('email').value = data[i].email;
-            document.getElementById('gender').value = data[i].gender;
+			if(data[i].gender.toLowerCase() === 'male'){
+				document.getElementById('male').checked = true;
+			}else{
+				document.getElementById('female').checked = true;
+			}
 			document.getElementById('courses').value = data[i].courses;
 			document.getElementById('address').value = data[i].address;
             document.getElementById('phone').value = data[i].phone;
@@ -357,12 +374,14 @@ function attach(){
 	window.addEventListener("click", function(event){
 		if(event.target === container){
 			container.style.display = "none";
-			//enable input fields
+			//disable fields
 			let inputs = document.getElementsByTagName('input');
+			document.getElementsByTagName('select')[0].disabled = false;
+			document.getElementsByTagName('input')[0].disabled = false;
+			document.getElementsByTagName('textarea')[0].disabled = false;
 			for(let i = 0; i < inputs.length; ++i){
-				inputs[i].disabled = false;
+				inputs[i].disabled = false;;
 			}
-
 		}
 	})
 	
